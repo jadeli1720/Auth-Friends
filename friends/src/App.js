@@ -22,12 +22,13 @@ function App() {
             <Link to="/login">Login</Link>
           </li>
           <li>
-            <Link to="/protected">Friends List</Link>
+            <Link to="/friends">Friends List</Link>
           </li>
         </ul>
         <Route exact path='/' component={Home} />
         <Route path="/login" component={Login} />
-        <PrivateRoute exact path="/protected" component={FriendsList} />
+        <PrivateRoute exact path="/friends" component={FriendsList} />
+        {/* Private */}
       </div>
     </Router>
   );

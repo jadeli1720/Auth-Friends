@@ -23,11 +23,11 @@ const Login = props => {
         axios
       .post("http://localhost:5000/api/login", login)
       .then(res => {
-        localStorage.setLogin("token", res.data.payload);
-        console.log("success", res.response);
+        localStorage.setItem("token", res.data.payload);
+        console.log("success", res.data);
       })
       .catch(err => console.log(err.response));
-      props.history.push('/');
+      props.history.push('/friends');
        setLogin({
             username: '',
             password: ''
