@@ -14,14 +14,21 @@ const Login = props => {
             "handleChange",
             e.target.name,
             e.target.value,
-            setLogin
         );
 
     };
 
     const loginSubmit = e => {
         e.preventDefault();
-        setLogin({
+        axios
+      .post("http://localhost:5000/api/login", login)
+      .then(res => {
+        localStorage.setLogin("token", res.data.payload);
+        console.log("success", res.response);
+      })
+      .catch(err => console.log(err.response));
+      props.history.push('/');
+       setLogin({
             username: '',
             password: ''
         })
@@ -33,13 +40,13 @@ const Login = props => {
                 <input
                     type="text"
                     name="username"
-                    value={props.username}
+                    value={login.username}
                     onChange={handleChange}
                 />
                 <input
                     type="password"
                     name="password"
-                    value={props.password}
+                    value={login.password}
                     onChange={handleChange}
                 />
                 <button>Log in</button>
