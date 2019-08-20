@@ -1,43 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
-class Login extends React.Component {
-    state = {
-        credentials: {
+
+const Login = props => {
+    const [login, setLogin] = useState({
+        username: '',
+        password: ''
+    });
+
+    const handleChange = e => {
+        setLogin({ ...login, [e.target.name]: e.target.value });
+        console.log(
+            "handleChange",
+            e.target.name,
+            e.target.value,
+            setLogin
+        );
+
+    };
+
+    const loginSubmit = e => {
+        e.preventDefault();
+        setLogin({
             username: '',
             password: ''
-        }
-    };
-
-    handleChange = e => {
-        this.setState({})
-    };
-
-    login = e => {
-        e.preventDefault();
+        })
     }
 
-    render() {
-        return (
-            <div>
-                <form onSubmit={this.login}>
-                    <input
-                        type="text"
-                        name="username"
-                        value={this.state.credentials.username}
-                        onChange={this.handleChange}
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        value={this.state.credentials.password}
-                        onChange={this.handleChange}
-                    />
-                    <button>Log in</button>
-                </form>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <form onSubmit={loginSubmit}>
+                <input
+                    type="text"
+                    name="username"
+                    value={props.username}
+                    onChange={handleChange}
+                />
+                <input
+                    type="password"
+                    name="password"
+                    value={props.password}
+                    onChange={handleChange}
+                />
+                <button>Log in</button>
+            </form>
+        </div>
+    );
+
 }
+
 
 export default Login;
