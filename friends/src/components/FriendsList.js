@@ -3,13 +3,13 @@ import { axiosWithAuth } from "../utlis/axiosWithAuth";
 
 import FriendCard from './FriendCard'
 
-const FriendsList = props => {
+const FriendsList = () => {
     const [friend, setFriend] = useState([]);
     const [newFriend, setNewFriend] = useState({
         name: '',
         age: '',
         email: '',
-        // id: Date.now()
+        id: Date.now()
     })
 
     useEffect(() => {
@@ -24,6 +24,12 @@ const FriendsList = props => {
                 console.log('Success FriendList', res.data)
             })
             .catch(err => console.log('Error getting response:', err.respond))
+    }
+
+    //Delete Friend
+    const deleteFriend = (id) => {
+        
+        setFriend(friend.filter(person => person.id !== id))
     }
 
     const handleChange = e => {
@@ -46,8 +52,9 @@ const FriendsList = props => {
             name: '',
             age: '',
             email: '',
-            // id: Date.now()
+            id: Date.now()
         })
+        // window.location.href = window.location.href;//helps so you don't have to click refresh, but the page refreshes
     }
 
 
@@ -67,7 +74,7 @@ const FriendsList = props => {
                     onChange={handleChange}
                 />
                 <input
-                    type="text"
+                    type="email"
                     name="email"
                     value={newFriend.email}
                     onChange={handleChange}
@@ -77,7 +84,10 @@ const FriendsList = props => {
             <h2>My Friends</h2>
             <button onClick={getData}>Refresh</button>
             {friend.map(friend => (
-                <FriendCard key={friend.id} friend={friend}
+                <FriendCard key={friend.id} 
+                            friend={friend}
+                            delete = {deleteFriend}
+
                 />
             ))}
         </div>

@@ -21,14 +21,14 @@ const Login = props => {
     const loginSubmit = e => {
         e.preventDefault();
         axios
-      .post("http://localhost:5000/api/login", login)
-      .then(res => {
-        localStorage.setItem("token", res.data.payload);
-        console.log("success", res.data);
-      })
-      .catch(err => console.log(err.response));
-      props.history.push('/friends');
-       setLogin({
+            .post("http://localhost:5000/api/login", login)
+            .then(res => {
+                localStorage.setItem("token", res.data.payload);
+                props.history.push('/friends');
+                console.log("success", res.data);
+            })
+            .catch(err => console.log(err.response));
+        setLogin({
             username: '',
             password: ''
         })
