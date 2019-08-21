@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from "../utlis/axiosWithAuth";
+// import Loader from 'react-loader-spinner';
+
+
 
 import FriendCard from './FriendCard'
 
@@ -61,8 +64,8 @@ const FriendsList = () => {
             age: '',
             email: '',
             id: Date.now()
-        })
-        // window.location.href = window.location.href;//helps so you don't have to click refresh, but the page refreshes
+        });
+        getData();//Allows for new post to immediately render to the screen
     }
 
 
