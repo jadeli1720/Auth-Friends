@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from "../utlis/axiosWithAuth";
 // import Loader from 'react-loader-spinner';
 
-
+import { Form } from 'semantic-ui-react';
 
 import FriendCard from './FriendCard'
 
@@ -38,7 +38,7 @@ const FriendsList = () => {
         //         console.log('Delete Friend',id)
         //     })
         //     .catch(err => console.log('Delete Friend', err.respond))
-            setFriend(friend.filter(person => person.id !== id))
+        setFriend(friend.filter(person => person.id !== id))
     }
 
     const handleChange = e => {
@@ -55,7 +55,7 @@ const FriendsList = () => {
         e.preventDefault();
         axiosWithAuth()
             .post(`http://localhost:5000/api/friends`, newFriend)
-            .then(res =>{ 
+            .then(res => {
                 console.log('New Friend', res)
             })
             .catch(err => console.log('New Friend', err.respond))
@@ -70,37 +70,59 @@ const FriendsList = () => {
 
 
     return (
-        <div>
-            <form onSubmit={friendSubmit}>
-                <input
-                    type="text"
-                    name="name"
-                    value={newFriend.name}
-                    onChange={handleChange}
-                />
-                <input
-                    type="text"
-                    name="age"
-                    value={newFriend.age}
-                    onChange={handleChange}
-                />
-                <input
-                    type="email"
-                    name="email"
-                    value={newFriend.email}
-                    onChange={handleChange}
-                />
-                <button>Add Friend</button>
-            </form>
+        <div >
             <h2>My Friends</h2>
             <button onClick={getData}>Refresh</button>
-            {friend.map(friend => (
-                <FriendCard key={friend.id}
-                    friend={friend}
-                    delete={deleteFriend}
-
-                />
-            ))}
+            <div className="friendsList">
+                <div className="addFormContainer">
+                    <Form onSubmit={friendSubmit} className="addForm">
+                        <h3>Add a Friend</h3>
+                        <Form.Field className="friendField">
+                            <label className="loginLabel">Name:</label>
+                            <input
+                                type="text"
+                                name="name"
+                                fluid
+                                className="friendInput"
+                                value={newFriend.name}
+                                onChange={handleChange}
+                            />
+                        </Form.Field>
+                        <Form.Field className="friendField">
+                            <label className="loginLabel">Age:</label>
+                            <input
+                                type="number"
+                                name="age"
+                                fluid
+                                className="friendInput"
+                                value={newFriend.age}
+                                onChange={handleChange}
+                            />
+                        </Form.Field>
+                        <Form.Field className="friendField">
+                            <label className="loginLabel">Email:</label>
+                            <input
+                                type="email"
+                                name="email"
+                                fluid
+                                className="friendInput"
+                                placeholder='sally@email.com'
+                                value={newFriend.email}
+                                onChange={handleChange}
+                            />
+                        </Form.Field>
+                        <button>Add Friend</button>
+                    </Form>
+                </div>
+                <div className="cardContainer">
+                    {friend.map(friend => (
+                        <FriendCard key={friend.id}
+                            friend={friend}
+                            delete={deleteFriend}
+                        />
+                    ))}
+                </div>
+            </div>
         </div>
 
     );

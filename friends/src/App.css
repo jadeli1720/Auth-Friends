@@ -79,11 +79,68 @@ a:hover{
 .loginLabel {
   font-size: 16px;
   font-weight: bold;
+  text-align: left;
 }
 
 .loginInput {
   padding: 7px 5px;
   margin-top: 8px;
+  width: 100%;
+}
+
+/* Friends List */
+
+.friendsList {
+  display: flex;
+  flex: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 40px auto;
+  
+}
+
+.addFormContainer {
+  border: 3px solid pink;
+  max-width: 400px;
+  width: 100%;
+  padding: 10px 15px;
+}
+
+.addForm{
+  background: white;
+  border: 1px solid rgb(226, 226, 226);
+  border-radius: 5px;
+  box-shadow: 2px 3px 8px 1px rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+
+}
+
+.addForm h3{
+  text-align: center;
+}
+
+.friendField {
+  margin: 10px;
+  text-align: left;
+}
+
+.friendInput{
+  padding: 7px 5px;
+  margin: 8px auto 0;
+  max-width: 330px;
+  width: 100%;
+}
+
+
+
+.cardContainer{
+  border: 3px solid green;
+  display: flex;
+  justify-content: center;
+  flex-flow: wrap;
+  max-width: 800px;
   width: 100%;
 }
 
