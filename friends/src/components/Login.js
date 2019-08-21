@@ -64,7 +64,7 @@ const Login = props => {
                             value={login.password}
                             onChange={handleChange} />
                     </Form.Field>
-                    <button type="submit">Log in</button>
+                    <button type="submit" className="loginButton">Log in</button>
 
                 </Form>
             </div>

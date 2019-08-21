@@ -14,7 +14,9 @@ function App() {
   return (
     <Router>
       <div className="App">
-          <ul className="navbar">
+        <div className="navbar">
+          <img src="https://i.imgur.com/LjR578k.png" className="logo"/>
+          <ul >
             <li>
               <Link to="/">Home</Link>
             </li>
@@ -25,10 +27,12 @@ function App() {
               <Link to="/friends">Friends List</Link>
             </li>
           </ul>
-        <Route exact path='/' component={Home} />
-        <Route path="/login" component={Login} />
-        <PrivateRoute exact path="/friends" component={FriendsList} />
-        {/* Private */}
+          </div>
+          <Route exact path='/' component={Home} />
+          <Route path="/login" component={Login} />
+          <PrivateRoute exact path="/friends" component={FriendsList} />
+          {/* Private */}
+        
       </div>
     </Router>
   );

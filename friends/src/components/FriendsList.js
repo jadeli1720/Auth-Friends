@@ -71,8 +71,8 @@ const FriendsList = () => {
 
     return (
         <div >
-            <h2>My Friends</h2>
-            <button onClick={getData}>Refresh</button>
+            <h2 className="friendTitle">My Friends</h2>
+            <button onClick={getData} className="refresh">Refresh</button>
             <div className="friendsList">
                 <div className="addFormContainer">
                     <Form onSubmit={friendSubmit} className="addForm">
@@ -82,6 +82,7 @@ const FriendsList = () => {
                             <input
                                 type="text"
                                 name="name"
+                                placeholder="Sally"
                                 fluid
                                 className="friendInput"
                                 value={newFriend.name}
@@ -93,6 +94,7 @@ const FriendsList = () => {
                             <input
                                 type="number"
                                 name="age"
+                                placeholder='0'
                                 fluid
                                 className="friendInput"
                                 value={newFriend.age}
@@ -111,7 +113,7 @@ const FriendsList = () => {
                                 onChange={handleChange}
                             />
                         </Form.Field>
-                        <button>Add Friend</button>
+                        <button  type="submit" className="friendButton" >Add Friend</button>
                     </Form>
                 </div>
                 <div className="cardContainer">
