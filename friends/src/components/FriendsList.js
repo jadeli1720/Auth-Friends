@@ -5,7 +5,7 @@ import FriendCard from './FriendCard'
 
 const FriendsList = props => {
     const [friend, setFriend] = useState([]);
-    const [newFriend, setNewFriend] = useState ({
+    const [newFriend, setNewFriend] = useState({
         name: '',
         age: '',
         email: '',
@@ -27,7 +27,7 @@ const FriendsList = props => {
     }
 
     const handleChange = e => {
-        setNewFriend({ ...friend, [e.target.name]: e.target.value });
+        setNewFriend({ ...newFriend, [e.target.name]: e.target.value });
         console.log(
             "handleChange",
             e.target.name,
@@ -38,6 +38,10 @@ const FriendsList = props => {
 
     const friendSubmit = e => {
         e.preventDefault();
+        axiosWithAuth()
+            .post(`http://localhost:5000/api/friends`, newFriend)
+            .then(res => console.log('New Friend', res))
+            .catch(err => console.log('New Friend', err.respond))
         setNewFriend({
             name: '',
             age: '',
@@ -70,11 +74,12 @@ const FriendsList = props => {
                 />
                 <button>Add Friend</button>
             </form>
-                <h2>My Friends</h2>
-                {friend.map(friend =>(
-                        <FriendCard key={friend.id} friend={friend}
-                                    />
-                 ))}
+            <h2>My Friends</h2>
+            <button onClick={getData}>Refresh</button>
+            {friend.map(friend => (
+                <FriendCard key={friend.id} friend={friend}
+                />
+            ))}
         </div>
 
     );
