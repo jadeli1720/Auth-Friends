@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from "../utlis/axiosWithAuth";
 
+import FriendCard from './FriendCard'
+
 const FriendsList = props => {
-    const [friend, setFriend] = useState({ 
-            name: '', 
-            age: '', 
-            email: '', 
-            id: Date.now() 
-        });
+    const [friend, setFriend] = useState([]);
+    const [newFriend, setNewFriend] = useState ({
+        name: '',
+        age: '',
+        email: '',
+        // id: Date.now()
+    })
 
     useEffect(() => {
         getData();
@@ -18,13 +21,13 @@ const FriendsList = props => {
             .get("http://localhost:5000/api/friends")
             .then(res => {
                 setFriend(res.data)
-                console.log(res.data)
+                console.log('Success FriendList', res.data)
             })
             .catch(err => console.log('Error getting response:', err.respond))
     }
 
     const handleChange = e => {
-        setFriend({ ...friend, [e.target.name]: e.target.value });
+        setNewFriend({ ...friend, [e.target.name]: e.target.value });
         console.log(
             "handleChange",
             e.target.name,
@@ -35,39 +38,46 @@ const FriendsList = props => {
 
     const friendSubmit = e => {
         e.preventDefault();
-        setFriend({
-
+        setNewFriend({
+            name: '',
+            age: '',
+            email: '',
+            // id: Date.now()
         })
     }
 
+
     return (
         <div>
-            <div className="header">
-                <form onSubmit={friendSubmit}>
-                    <input
-                        type="text"
-                        name="name"
-                        value={friend.name}
-                        onChange={handleChange}
-                    />
-                    <input
-                        type="text"
-                        name="age"
-                        value={friend.age}
-                        onChange={handleChange}
-                    />
-                    <input
-                        type="email"
-                        name="email"
-                        value={friend.email}
-                        onChange={handleChange}
-                    />
-                    <button>Log in</button>
-                </form>
-            </div>
-            
+            <form onSubmit={friendSubmit}>
+                <input
+                    type="text"
+                    name="name"
+                    value={newFriend.name}
+                    onChange={handleChange}
+                />
+                <input
+                    type="text"
+                    name="age"
+                    value={newFriend.age}
+                    onChange={handleChange}
+                />
+                <input
+                    type="text"
+                    name="email"
+                    value={newFriend.email}
+                    onChange={handleChange}
+                />
+                <button>Add Friend</button>
+            </form>
+                <h2>My Friends</h2>
+                {friend.map(friend =>(
+                        <FriendCard key={friend.id} friend={friend}
+                                    />
+                 ))}
         </div>
-    )
-}
+
+    );
+};
 
 export default FriendsList;
