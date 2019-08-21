@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import { Form } from 'semantic-ui-react';
 
 const Login = props => {
     const [login, setLogin] = useState({
@@ -36,21 +37,37 @@ const Login = props => {
 
     return (
         <div>
-            <form onSubmit={loginSubmit}>
-                <input
-                    type="text"
-                    name="username"
-                    value={login.username}
-                    onChange={handleChange}
-                />
-                <input
-                    type="password"
-                    name="password"
-                    value={login.password}
-                    onChange={handleChange}
-                />
-                <button>Log in</button>
-            </form>
+            <div className="formContainer">
+                <h2>Please Login to see your friends!</h2>
+                <Form onSubmit={loginSubmit} className="loginForm" >
+                    <Form.Field className="loginField">
+                        <label className="loginLabel" >Username:</label>
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder='username'
+                            fluid
+                            className="loginInput"
+                            width={6}
+                            value={login.username}
+                            onChange={handleChange} />
+                    </Form.Field>
+                    <Form.Field className="loginField">
+                        <label className="loginLabel" >Password:</label>
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder='password'
+                            fluid
+                            className="loginInput"
+                            width={6}
+                            value={login.password}
+                            onChange={handleChange} />
+                    </Form.Field>
+                    <button type="submit">Log in</button>
+
+                </Form>
+            </div>
         </div>
     );
 

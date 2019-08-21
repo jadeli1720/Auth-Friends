@@ -14,17 +14,17 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <ul>
-        <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/friends">Friends List</Link>
-          </li>
-        </ul>
+          <ul className="navbar">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/friends">Friends List</Link>
+            </li>
+          </ul>
         <Route exact path='/' component={Home} />
         <Route path="/login" component={Login} />
         <PrivateRoute exact path="/friends" component={FriendsList} />
