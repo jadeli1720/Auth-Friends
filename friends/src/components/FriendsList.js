@@ -28,8 +28,14 @@ const FriendsList = () => {
 
     //Delete Friend
     const deleteFriend = (id) => {
-        
-        setFriend(friend.filter(person => person.id !== id))
+        // axiosWithAuth()
+        //     .delete(`http://localhost:5000/api/friends${id}`, friend)
+        //     .then(res => {
+        //         // setFriend(friend.filter(person => person.id !== id))
+        //         console.log('Delete Friend',id)
+        //     })
+        //     .catch(err => console.log('Delete Friend', err.respond))
+            setFriend(friend.filter(person => person.id !== id))
     }
 
     const handleChange = e => {
@@ -46,7 +52,9 @@ const FriendsList = () => {
         e.preventDefault();
         axiosWithAuth()
             .post(`http://localhost:5000/api/friends`, newFriend)
-            .then(res => console.log('New Friend', res))
+            .then(res =>{ 
+                console.log('New Friend', res)
+            })
             .catch(err => console.log('New Friend', err.respond))
         setNewFriend({
             name: '',
@@ -84,9 +92,9 @@ const FriendsList = () => {
             <h2>My Friends</h2>
             <button onClick={getData}>Refresh</button>
             {friend.map(friend => (
-                <FriendCard key={friend.id} 
-                            friend={friend}
-                            delete = {deleteFriend}
+                <FriendCard key={friend.id}
+                    friend={friend}
+                    delete={deleteFriend}
 
                 />
             ))}
