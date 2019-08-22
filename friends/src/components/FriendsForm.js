@@ -21,14 +21,14 @@ const FriendsForm = ({ addFriend }) => {
 
     const friendSubmit = e => {
         e.preventDefault();
-        addFriend();
+        addFriend(newFriend);
         setNewFriend({
             name: '',
             age: '',
             email: '',
             id: Date.now()
         });
-    }
+    };
 
     return (
         <div>

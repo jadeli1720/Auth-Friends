@@ -7,13 +7,6 @@ import FriendCard from './FriendCard'
 
 const FriendsList = () => {
     const [friend, setFriend] = useState([]);//state forarray from server.
-    const [newFriend, setNewFriend] = useState({
-        name: '',
-        age: '',
-        email: '',
-        id: Date.now()
-    })//state used for the form
-
     
     useEffect(() => {
         axiosWithAuth()
@@ -25,7 +18,16 @@ const FriendsList = () => {
             .catch(err => console.log('Error getting response:', err.respond))
     }, []);
 
-
+    //Add Friend
+    const addFriend = friend => {
+        axiosWithAuth()
+            .post(`http://localhost:5000/api/friends`, friend)
+            .then(res => {
+                setFriend(res.data)//This allows for the new friend to be added to the array and to render straight to the page
+                console.log('Add Friend', res)
+            })
+            .catch(err => console.log('Add Friend', err.respond))
+    }
 
     //Delete Friend
     const deleteFriend = (id) => {
@@ -41,17 +43,6 @@ const FriendsList = () => {
 
     //Editing Friend
     
-
-    const addFriend = friend => {
-        axiosWithAuth()
-            .post(`http://localhost:5000/api/friends`, newFriend)
-            .then(res => {
-                setFriend(res.data)//This allows for the new friend to be added to the array and to render straight to the page
-                console.log('New Friend', res)
-            })
-            .catch(err => console.log('New Friend', err.respond))
-    }
-
 
     return (
         <div >
