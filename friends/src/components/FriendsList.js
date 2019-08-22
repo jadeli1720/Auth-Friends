@@ -15,8 +15,7 @@ const FriendsList = () => {
         id: Date.now()
     })
 
-
-
+    
     useEffect(() => {
         axiosWithAuth()
             .get("http://localhost:5000/api/friends")
@@ -31,14 +30,14 @@ const FriendsList = () => {
 
     //Delete Friend
     const deleteFriend = (id) => {
-        // axiosWithAuth()
-        //     .delete(`http://localhost:5000/api/friends${id}`, friend)
-        //     .then(res => {
-        //         // setFriend(friend.filter(person => person.id !== id))
-        //         console.log('Delete Friend',id)
-        //     })
-        //     .catch(err => console.log('Delete Friend', err.respond))
-        setFriend(friend.filter(person => person.id !== id))
+        console.log(id)//logging the id of the delete button clicked
+        axiosWithAuth()
+            .delete(`http://localhost:5000/api/friends/${id}`)
+            .then(res => {
+                setFriend(res.data)
+                console.log('Delete Friend', res)
+            })
+            .catch(err => console.log('Delete Friend', err.response))
     }
 
     const handleChange = e => {
@@ -56,7 +55,7 @@ const FriendsList = () => {
         axiosWithAuth()
             .post(`http://localhost:5000/api/friends`, newFriend)
             .then(res => {
-                setFriend(res.data)
+                setFriend(res.data)//This allows for the new friend to be added to the array and to render straight to the page
                 console.log('New Friend', res)
             })
             .catch(err => console.log('New Friend', err.respond))
@@ -120,7 +119,7 @@ const FriendsList = () => {
                     {friend.map(friend => (
                         <FriendCard key={friend.id}
                             friend={friend}
-                            delete={deleteFriend}
+                            deleteFriend={deleteFriend}
                         />
                     ))}
                 </div>

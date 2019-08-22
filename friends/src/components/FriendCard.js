@@ -1,19 +1,19 @@
 import React from 'react';
 
-const FriendCard = (props) => {
+const FriendCard = ({ friend, deleteFriend }) => {
     // console.log('From Friend', friend)
     return (
         <div className="card">
             <div className="cardHeader">
-                <h4>{props.friend.name}</h4>
+                <h4>{friend.name}</h4>
             </div>
             <div className="cardBody">
-                <p>{props.friend.age}</p>
-                <p><a>{props.friend.email}</a></p>
+                <p>{friend.age}</p>
+                <p><a>{friend.email}</a></p>
             </div>
             <div className="cardFooter">
                 <button className="footerButton" >Edit</button>
-                <button onClick={() => { props.delete(props.friend.id) }}  className="footerButton" >Delete</button>
+                <button onClick={() => { deleteFriend(friend.id) }}  className="footerButton" >Delete</button>
             </div>
 
         </div>
