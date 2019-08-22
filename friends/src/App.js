@@ -31,8 +31,6 @@ function App() {
           <Route exact path='/' component={Home} />
           <Route path="/login" component={Login} />
           <PrivateRoute exact path="/friends" component={FriendsList} />
-          {/* Private */}
-        
       </div>
     </Router>
   );

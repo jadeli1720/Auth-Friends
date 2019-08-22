@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 
 const FriendCard = ({ friend, deleteFriend }) => {
     // console.log('From Friend', friend)
@@ -13,7 +12,7 @@ const FriendCard = ({ friend, deleteFriend }) => {
                 <p><a>{friend.email}</a></p>
             </div>
             <div className="cardFooter">
-                <button className="footerButton" >Edit</button>
+                <button to={`/friends/edit/${friend.id}`} className="footerButton" >Edit</button>
                 <button onClick={() => { deleteFriend(friend.id) }}  className="footerButton" >Delete</button>
             </div>
 

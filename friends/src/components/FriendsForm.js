@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Form } from 'semantic-ui-react';
 
-const FriendsForm = ({ addFriend }) => {
-    const [newFriend, setNewFriend] = useState({
+const FriendsForm = ({ submitFriend, initialValues }) => {
+    const [newFriend, setNewFriend] = useState( initialValues || { 
         name: '',
         age: '',
-        email: '',
-        id: Date.now()
+        email: ''
     })
 
     const handleChange = e => {
@@ -16,17 +15,15 @@ const FriendsForm = ({ addFriend }) => {
             e.target.name,
             e.target.value,
         );
-
     };
 
     const friendSubmit = e => {
         e.preventDefault();
-        addFriend(newFriend);
+        submitFriend(newFriend);
         setNewFriend({
             name: '',
             age: '',
-            email: '',
-            id: Date.now()
+            email: ''
         });
     };
 
