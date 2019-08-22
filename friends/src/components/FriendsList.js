@@ -2,18 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { axiosWithAuth } from "../utlis/axiosWithAuth";
 // import Loader from 'react-loader-spinner';
 
-import { Form } from 'semantic-ui-react';
-
+import FriendsForm from './FriendsForm';
 import FriendCard from './FriendCard'
 
 const FriendsList = () => {
-    const [friend, setFriend] = useState([]);
+    const [friend, setFriend] = useState([]);//state forarray from server.
     const [newFriend, setNewFriend] = useState({
         name: '',
         age: '',
         email: '',
         id: Date.now()
-    })
+    })//state used for the form
 
     
     useEffect(() => {
@@ -40,18 +39,10 @@ const FriendsList = () => {
             .catch(err => console.log('Delete Friend', err.response))
     }
 
-    const handleChange = e => {
-        setNewFriend({ ...newFriend, [e.target.name]: e.target.value });
-        console.log(
-            "handleChange",
-            e.target.name,
-            e.target.value,
-        );
+    //Editing Friend
+    
 
-    };
-
-    const friendSubmit = e => {
-        e.preventDefault();
+    const addFriend = friend => {
         axiosWithAuth()
             .post(`http://localhost:5000/api/friends`, newFriend)
             .then(res => {
@@ -59,62 +50,16 @@ const FriendsList = () => {
                 console.log('New Friend', res)
             })
             .catch(err => console.log('New Friend', err.respond))
-        setNewFriend({
-            name: '',
-            age: '',
-            email: '',
-            id: Date.now()
-        });
     }
 
 
     return (
         <div >
             <h2 className="friendTitle">My Friends</h2>
-            {/* <button onClick={getData} className="refresh">Refresh</button> */}
             <div className="friendsList">
-                <div className="addFormContainer">
-                    <Form onSubmit={friendSubmit} className="addForm">
-                        <h3>Add a Friend</h3>
-                        <Form.Field className="friendField">
-                            <label className="loginLabel">Name:</label>
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Sally"
-                                fluid
-                                className="friendInput"
-                                value={newFriend.name}
-                                onChange={handleChange}
-                            />
-                        </Form.Field>
-                        <Form.Field className="friendField">
-                            <label className="loginLabel">Age:</label>
-                            <input
-                                type="number"
-                                name="age"
-                                placeholder='0'
-                                fluid
-                                className="friendInput"
-                                value={newFriend.age}
-                                onChange={handleChange}
-                            />
-                        </Form.Field>
-                        <Form.Field className="friendField">
-                            <label className="loginLabel">Email:</label>
-                            <input
-                                type="email"
-                                name="email"
-                                fluid
-                                className="friendInput"
-                                placeholder='sally@email.com'
-                                value={newFriend.email}
-                                onChange={handleChange}
-                            />
-                        </Form.Field>
-                        <button type="submit" className="friendButton" >Add Friend</button>
-                    </Form>
-                </div>
+                <FriendsForm
+                    addFriend={addFriend}
+                />
                 <div className="cardContainer">
                     {friend.map(friend => (
                         <FriendCard key={friend.id}
