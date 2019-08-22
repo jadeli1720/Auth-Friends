@@ -15,11 +15,9 @@ const FriendsList = () => {
         id: Date.now()
     })
 
-    useEffect(() => {
-        getData();
-    }, []);
 
-    const getData = () => {
+
+    useEffect(() => {
         axiosWithAuth()
             .get("http://localhost:5000/api/friends")
             .then(res => {
@@ -27,7 +25,9 @@ const FriendsList = () => {
                 console.log('Success FriendList', res.data)
             })
             .catch(err => console.log('Error getting response:', err.respond))
-    }
+    }, []);
+
+
 
     //Delete Friend
     const deleteFriend = (id) => {
@@ -56,6 +56,7 @@ const FriendsList = () => {
         axiosWithAuth()
             .post(`http://localhost:5000/api/friends`, newFriend)
             .then(res => {
+                setFriend(res.data)
                 console.log('New Friend', res)
             })
             .catch(err => console.log('New Friend', err.respond))
@@ -65,14 +66,13 @@ const FriendsList = () => {
             email: '',
             id: Date.now()
         });
-        getData();//Allows for new post to immediately render to the screen
     }
 
 
     return (
         <div >
             <h2 className="friendTitle">My Friends</h2>
-            <button onClick={getData} className="refresh">Refresh</button>
+            {/* <button onClick={getData} className="refresh">Refresh</button> */}
             <div className="friendsList">
                 <div className="addFormContainer">
                     <Form onSubmit={friendSubmit} className="addForm">
@@ -113,7 +113,7 @@ const FriendsList = () => {
                                 onChange={handleChange}
                             />
                         </Form.Field>
-                        <button  type="submit" className="friendButton" >Add Friend</button>
+                        <button type="submit" className="friendButton" >Add Friend</button>
                     </Form>
                 </div>
                 <div className="cardContainer">

@@ -26,7 +26,7 @@ const Login = props => {
             .then(res => {
                 localStorage.setItem("token", res.data.payload);
                 props.history.push('/friends');
-                console.log("success", res.data);
+                console.log("Successful login", res.data);
             })
             .catch(err => console.log(err.response));
         setLogin({
