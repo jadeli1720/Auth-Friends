@@ -7,7 +7,7 @@ import FriendsForm from './FriendsForm';
 import FriendCard from './FriendCard'
 
 const FriendsList = (props) => {
-    const [friend, setFriend] = useState([]);//state forarray from server.
+    const [friend, setFriend] = useState([]);//state for array from server.
 
     useEffect(() => {
         axiosWithAuth()
